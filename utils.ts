@@ -1,8 +1,9 @@
 export { assertUsage };
 export { assert };
-export { splice };
-export { spliceMany };
 export { logObject };
+// export { splice };
+export { spliceMany };
+export type { SpliceOperation };
 
 function assert(condition: unknown): asserts condition {
   if (condition) return;
@@ -14,6 +15,11 @@ function assertUsage(condition: unknown, msg: string): asserts condition {
   throw new Error("[Wrong Usage] " + msg);
 }
 
+function logObject(obj: Object) {
+  console.log(JSON.stringify(obj, null, 2));
+}
+
+/*
 function splice(
   str: string,
   index: number,
@@ -22,6 +28,7 @@ function splice(
 ): string {
   return str.slice(0, index) + add + str.slice(index + count);
 }
+*/
 
 type SpliceOperation = {
   start: number;
@@ -42,8 +49,4 @@ function spliceMany(str: string, operations: SpliceOperation[]): string {
   });
   strMod += str.slice(endPrev, str.length - 1);
   return strMod;
-}
-
-function logObject(obj: Object) {
-  console.log(JSON.stringify(obj, null, 2));
 }

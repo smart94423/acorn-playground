@@ -1,35 +1,22 @@
 import { parse } from "acorn";
 import fs from "fs";
 import type { Program, Identifier } from "estree";
-import { assert, logObject, spliceMany } from "./utils";
-
-declare module "estree" {
-  interface BaseNodeWithoutComments {
-    start: number;
-    end: number;
-  }
-}
+import { assert, logObject, spliceMany, type SpliceOperation } from "./utils";
 
 const code = fs.readFileSync("./input.js").toString();
 const codeMod = replaceImportStatements(code);
 console.log(codeMod);
 
 function replaceImportStatements(code: string): string {
-  const res = parse(code, {
+  const { body } = parse(code, {
     ecmaVersion: "latest",
     sourceType: "module",
     // https://github.com/acornjs/acorn/issues/1136
   }) as any as Program;
 
-  //logObject(res)
+  const spliceOperations: SpliceOperation[] = [];
 
-  const spliceOperations: {
-    start: number;
-    end: number;
-    replacement: string;
-  }[] = [];
-
-  res.body
+  body
     .filter((node) => node.type === "ImportDeclaration")
     .forEach((node) => {
       assert(node.type === "ImportDeclaration");
@@ -63,10 +50,16 @@ function replaceImportStatements(code: string): string {
         end,
         replacement,
       });
-      // logObject(node);
-      // console.log(code.slice(node.start, node.end));
     });
 
   const codeMod = spliceMany(code, spliceOperations);
   return codeMod;
+}
+
+// https://github.com/acornjs/acorn/issues/1136#issuecomment-1203671368
+declare module "estree" {
+  interface BaseNodeWithoutComments {
+    start: number;
+    end: number;
+  }
 }
