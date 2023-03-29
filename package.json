@@ -1,6 +1,12 @@
 {
+  "scripts": {
+    "start": "ts-node -T ./parse.ts"
+  },
 	"dependencies": {
+		"@types/node": "^18.15.11",
 		"acorn": "^8.8.2",
-		"acorn-walk": "^8.2.0"
+		"acorn-walk": "^8.2.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.2"
 	}
 }
