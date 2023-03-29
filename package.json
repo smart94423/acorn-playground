@@ -1,8 +1,10 @@
 {
 	"scripts": {
-		"start": "ts-node -T ./parseWithEsModuleLexer.ts"
+		"start": "ts-node -T ./parseWithAcorn.ts",
+		"start2": "ts-node -T ./parseWithEsModuleLexer.ts"
 	},
 	"dependencies": {
+		"@types/estree": "^1.0.0",
 		"@types/node": "^18.15.11",
 		"acorn": "^8.8.2",
 		"acorn-walk": "^8.2.0",

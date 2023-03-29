@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/estree': ^1.0.0
   '@types/node': ^18.15.11
   acorn: ^8.8.2
   acorn-walk: ^8.2.0
@@ -9,6 +10,7 @@ specifiers:
   typescript: ^5.0.2
 
 dependencies:
+  '@types/estree': 1.0.0
   '@types/node': 18.15.11
   acorn: 8.8.2
   acorn-walk: 8.2.0
@@ -55,6 +57,10 @@ packages:
 
   /@tsconfig/node16/1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
+    dev: false
+
+  /@types/estree/1.0.0:
+    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: false
 
   /@types/node/18.15.11:
