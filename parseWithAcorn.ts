@@ -31,9 +31,21 @@ res.body
 
     let replacement = "";
     node.specifiers.forEach((specifier) => {
+      assert(
+        specifier.type === "ImportSpecifier" ||
+          specifier.type === "ImportDefaultSpecifier"
+      );
       const importVar = specifier.local.name;
-      const imported = (specifier as any).imported as Identifier | undefined;
-      const importName = imported ? imported.name : importVar;
+      const importName = (() => {
+        if (specifier.type === "ImportDefaultSpecifier") return "default";
+        {
+          const imported = (specifier as any).imported as
+            | Identifier
+            | undefined;
+          if (imported) return imported.name;
+        }
+        return importVar;
+      })();
       replacement += `const ${importVar} = '__import|${file}|${importName}';`;
     });
     assert(replacement.length > 0);
