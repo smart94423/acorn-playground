@@ -19,6 +19,9 @@ function replaceImportStatements(code: string): string {
   body.forEach((node) => {
     if (node.type !== "ImportDeclaration") return;
 
+    logObject(node);
+    console.log(code.slice(node.start, node.end));
+
     const file = node.source.value;
     assert(file);
 
